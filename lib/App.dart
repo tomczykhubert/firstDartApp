@@ -9,10 +9,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: BlocProvider(
-        create: (context) => AppCubit(),
-        child: const Homepage(),
-      ),
-    );
+        home: BlocProvider<AppCubit>(
+      create: (BuildContext context) => AppCubit(),
+      child: const Homepage(),
+    ));
   }
 }

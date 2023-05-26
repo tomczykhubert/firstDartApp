@@ -13,28 +13,14 @@ class Homepage extends StatelessWidget {
         centerTitle: true,
         title: const Text('App'),
         foregroundColor: Colors.black,
-        backgroundColor: Colors.yellow,
+        backgroundColor: const Color.fromARGB(255, 200, 185, 50),
         actions: const [
-          Icon(Icons.notification_add),
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Icon(Icons.notification_add),
+          ),
         ],
       ),
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   title: const Text('App'),
-      //   foregroundColor: Colors.black,
-      //   backgroundColor: Colors.yellow,
-      //   actions: [
-      //     BlocBuilder<AppCubit2, AppState2>(
-      //       builder: (context, state) {
-      //         final cubit = context.read<AppCubit2>();
-      //         return IconButton(
-      //           onPressed: () => cubit.changeNotificationIcon(),
-      //           icon: Icon(state.icon),
-      //         );
-      //       },
-      //     )
-      //   ],
-      // ),
       drawer: Drawer(
         backgroundColor: const Color.fromARGB(255, 30, 30, 30),
         child: ListView(
@@ -57,6 +43,7 @@ class Homepage extends StatelessWidget {
                 right: 10,
               ),
               child: Divider(
+                thickness: 1,
                 color: Colors.white,
               ),
             ),
@@ -68,6 +55,24 @@ class Homepage extends StatelessWidget {
               ),
               leading: const Icon(
                 Icons.login,
+                color: Colors.white,
+              ),
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const SecondPage(),
+                  ),
+                );
+              },
+              title: const Text(
+                'Calculator',
+                style: TextStyle(color: Colors.white),
+              ),
+              leading: const Icon(
+                Icons.calculate_outlined,
                 color: Colors.white,
               ),
             ),
@@ -91,13 +96,20 @@ class Homepage extends StatelessWidget {
           return ListView(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 10,
-                ),
+                padding: const EdgeInsets.all(20),
                 child: Text(
                   state.abc,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              IconButton(
+                onPressed: () => cubit.changeText(),
+                // icon: const Icon(Icons.add),
+                icon: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 50,
                 ),
               ),
               Padding(
@@ -123,15 +135,16 @@ class Homepage extends StatelessWidget {
                         });
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.yellow, // Background color
+                    backgroundColor: const Color.fromARGB(
+                        255, 200, 185, 50), // Background color
                   ),
                   child: const Text(
-                    'Elevated Button',
+                    'Elevated button',
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
               ),
-              TextButton(
+              OutlinedButton(
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
@@ -140,52 +153,16 @@ class Homepage extends StatelessWidget {
                     ),
                   );
                 },
-                child: const Text(
-                  'Text Button',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const SecondPage(),
-                    ),
-                  );
-                },
                 style: OutlinedButton.styleFrom(
-                    side: const BorderSide(width: 2.0, color: Colors.yellow)),
+                  side: const BorderSide(
+                    color: Color.fromARGB(255, 200, 185, 50),
+                  ),
+                ),
                 child: const Text(
-                  'Outlined Button',
+                  'Outlined button',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
-              IconButton(
-                onPressed: () => cubit.changeText(),
-                // icon: const Icon(Icons.add),
-                icon: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-              ),
-              // GestureDetector(
-              //   onTap: () {},
-              //   child: const Text('Gesture'),
-              // ),
-              // Container(
-              //   width: 50,
-              //   height: 50,
-              //   decoration: const BoxDecoration(
-              //     image: DecorationImage(
-              //       image: NetworkImage('https://picsum.photos/50/50'),
-              //     ),
-              //   ),
-              // ),
-              // const Card(
-              //   margin: EdgeInsets.all(16),
-              //   elevation: 10,
-              //   child: Text('Card'),
-              // ),
             ],
           );
         },
